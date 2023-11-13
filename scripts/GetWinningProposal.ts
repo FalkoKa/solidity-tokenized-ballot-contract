@@ -10,7 +10,8 @@ async function main() {
   const wallet = new ethers.Wallet(process.env.PRIVATE_KEY ?? '', provider);
 
   // todo: address of deployed tonkenized ballot contract
-  const tokenizedBallotContractAddress = '';
+  const tokenizedBallotContractAddress =
+    '0x94c8383F5CC86889D57873410ADf1D92fD04546A';
   const tokenizedBallotContract = TokenizedBallot__factory.connect(
     tokenizedBallotContractAddress,
     wallet
