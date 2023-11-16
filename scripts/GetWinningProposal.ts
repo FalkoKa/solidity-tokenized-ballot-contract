@@ -1,5 +1,9 @@
 import { ethers } from 'ethers';
-import { MyToken__factory, TokenizedBallot__factory } from '../typechain-types';
+import {
+  MyToken__factory,
+  TokenizedBallot,
+  TokenizedBallot__factory,
+} from '../typechain-types';
 import * as dotenv from 'dotenv';
 dotenv.config();
 
@@ -12,10 +16,10 @@ async function main() {
   // todo: address of deployed tonkenized ballot contract
   const tokenizedBallotContractAddress =
     '0x94c8383F5CC86889D57873410ADf1D92fD04546A';
-  const tokenizedBallotContract = TokenizedBallot__factory.connect(
-    tokenizedBallotContractAddress,
-    wallet
-  );
+  const tokenizedBallotFactory = new TokenizedBallot__factory(wallet);
+  const tokenizedBallotContract = tokenizedBallotFactory.attach(
+    tokenizedBallotContractAddress
+  ) as TokenizedBallot;
 
   const winningProposal = await tokenizedBallotContract.winningProposal();
 

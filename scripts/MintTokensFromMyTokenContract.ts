@@ -1,5 +1,5 @@
 import { ethers } from 'ethers';
-import { MyToken__factory } from '../typechain-types';
+import { MyToken, MyToken__factory } from '../typechain-types';
 import * as dotenv from 'dotenv';
 dotenv.config();
 
@@ -21,7 +21,8 @@ async function main() {
 
   // Connecting to MyTokenContract
   const contractAddress = '0x7fE72432Df2F96EB07236FF1d23C85d89f5b5D1F';
-  const myTokenContract = MyToken__factory.connect(contractAddress, wallet);
+  const myTokenFactory = new MyToken__factory(wallet);
+  const myTokenContract = myTokenFactory.attach(contractAddress) as MyToken;
 
   // Minting tokens
   try {
